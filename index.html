@@ -33,7 +33,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-messaging-compat.js"></script>
 
     <script>
-        const backendUrl = 'https://pwa-backend-yu9q.onrender.com'; // Render backend linki
+        const backendUrl = 'https://pwa-backend-yu9q.onrender.com'; // Render backend
         const firebaseConfig = {
             apiKey: "AIzaSyBMe8SfkLPZek2wqi6dU1YdPhNNziXHRPw",
             authDomain: "pwa0510-c9241.firebaseapp.com",
@@ -49,10 +49,11 @@
 
         let savedToken = '';
 
-        // Service Worker kaydı
+        // Service Worker kaydı (doğru yol)
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('firebase-messaging-sw.js')
-            .then(() => console.log('Service Worker kayıt edildi.'));
+            navigator.serviceWorker.register('/panel/firebase-messaging-sw.js')
+            .then(() => console.log('Service Worker kayıt edildi.'))
+            .catch(err => console.error('SW kaydı başarısız:', err));
         }
 
         // Token al ve backend'e kaydet
@@ -64,7 +65,7 @@
             })
             .then(res => res.json())
             .then(data => console.log('Token kaydedildi:', data))
-            .catch(err => console.error(err));
+            .catch(err => console.error('Token kaydı başarısız:', err));
         }
 
         // Bildirim izni butonu
@@ -148,4 +149,3 @@
     </script>
 </body>
 </html>
-
